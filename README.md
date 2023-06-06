@@ -194,6 +194,11 @@ Edit rootfs `/etc/wpa_supplicant.conf`:
 
 Generate a valid conf, you can find an example here.
 
+Dont forget to exit the root account
+```
+exit
+```
+
 
 ### Replace Rootfs with ours
 
@@ -207,7 +212,7 @@ cd sonic_pad_os/out/r818-sonic_lcd/
 Mount Tina `rootfs` 
 
 ```
-mkdir mountfs && mount-o loop rootfs.img mountfs
+mkdir mountfs && sudo mount -o loop rootfs.img mountfs
 ```
 
 Delete Tina `rootfs` contents
@@ -219,13 +224,13 @@ sudo rm -rf *
 Copy our rootfs to the mount dir
 ```
 sudo -i
-cp -rfp rootfs/* /home/jpe230/SonicPadOS/out/r818-sonic_lcd/mountfs/
+cp -rfp rootfs/* /home/[path to repo]/sonic_pad_os/out/r818-sonic_lcd/mountfs/
 exit
 ```
 
 Unmount image
 ```
-umount mountfs
+sudo umount mountfs
 ```
 
 Repair image, accept all prompts
@@ -242,6 +247,19 @@ pack
 ```
 
 Flash with using Livesuit or PhoenixSuit
+
+### After flash
+
+1) Get the IP of the Pad with help of your router, or by any other means
+2) SSH Into
+3) Once logged in, resize the fs using: (double check that the partition is correct!!!!)
+```
+sudo resize2fs /dev/mmcblk0p7
+```
+4) Verify disk space with:
+```
+df -h
+```
 
 
 ### Misc.
