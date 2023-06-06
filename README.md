@@ -338,7 +338,7 @@ USAGE: brightness [OPTIONS] [value]
 * Bluetooth (?) Dunno why you would need it but i haven't tested it
 * Audio
 * SPI port for Accelerometer
-* Ethernet* managed to get an IP but needs configuring.
+* Ethernet* managed to get an IP but I hadn't bothered configuring it. Should work OOB
 
 ### Considerations
 
