@@ -37,8 +37,7 @@ You will need to re-open the executable multiple times and trust the author.
 ## UART
 
 I seriously recommend buying a cheap UART to USB adapter and soldering wires to the exposed pads at the bottom of the PCB.
-
-
+--------------------------------------------------------------------------------------------------------------------------
 # Preparation
 
 ## Compile Tina
@@ -81,21 +80,16 @@ make menuconfig
 ```
 
 A menu will appear:
-
-<img here>
+![makemenu](https://github.com/Jpe230/SonicPad-Debian/assets/6202305/f0b3d392-0dbd-4cf9-bc78-2114c3b07d03)
 
 Go to `Target Images`:
-
-<img here>
+![TargetImages](https://github.com/Jpe230/SonicPad-Debian/assets/6202305/38acb4f0-04fe-4c0f-ae20-1823559f02d5)
 
 Disable `squashfs` and enable `ext4`:
-
-<img here>
-
+![ext4 conf](https://github.com/Jpe230/SonicPad-Debian/assets/6202305/e1f502e0-a58d-4664-b95b-9c59700956f9)
 
 Make the ext4 partition bigger, I use 1GB.
-
-<img here>
+![fs-size](https://github.com/Jpe230/SonicPad-Debian/assets/6202305/7a2146dc-5d02-4c57-a89e-ade835c32d07)
 
 You can always increase the size if your rootfs doesn't fit.  
 
