@@ -88,7 +88,7 @@ A menu will appear:
 Go to `Target Images`:
 ![TargetImages](https://github.com/Jpe230/SonicPad-Debian/assets/6202305/38acb4f0-04fe-4c0f-ae20-1823559f02d5)
 
-Disable `squashfs` and enable `ext4`:
+Disable `squashfs` and enable `ext4` (you will need to setup ext4 partition):
 ![ext4 conf](https://github.com/Jpe230/SonicPad-Debian/assets/6202305/e1f502e0-a58d-4664-b95b-9c59700956f9)
 
 Make the ext4 partition bigger, I use 1GB.
@@ -96,18 +96,7 @@ Make the ext4 partition bigger, I use 1GB.
 
 You can always increase the size if your rootfs doesn't fit.  
 
-
-Compile Tina with: 
-
-```
-make
-```
-  
-Make sure that it compiled, and a `rootfs.img` file was generate at `sonic_pad_os/out/r818-sonic_lcd/`
-
-### Configure partitions
-
-cd into the root of the `sonic_pad_os` repo and edit the following file:
+Edit the following file:
 ```
 device/config/chips/r818/configs/sonic_lcd/linux/sys_partition.fex
 ```
@@ -121,10 +110,23 @@ Remove the partitions after `rootfs` and increase the size for the `rootfs` part
     downloadfile = "rootfs.fex"
     user_type    = 0x8000
 ```
+The size is in blocks, in the example I set 7GB for the rootfs
+
+Compile Tina with: 
+
+```
+make
+```
+  
+Make sure that it compiled, and a `rootfs.img` file was generate at `sonic_pad_os/out/r818-sonic_lcd/`
+
+Note: you can reduce the compilation time by disabling Creality's packages and modifying the Makefile. See [this commit](https://github.com/Jpe230/SonicPadOS/commit/3c7059261dbf0e7579e717690b7f6a8fd12529a0).
+
+
 
 ### Create a Debian RootFS
 
-We are going to use a `debootstrap` to create a rootfs, but you are free to choose whatever distro you want.
+We are going to use `debootstrap` to create a rootfs, but you are free to choose whatever distro you want.
 
 Run the following:
 ```
@@ -179,7 +181,7 @@ rm -rf cmake-3.26.4
 # Configure fstab:
 echo "PARTLABEL="rootfs" / ext4 noatime,lazytime,rw 0 0" > /etc/fstab
 
-# Configure the loading of kernel modules
+# Configure rc local
 ln -fs /lib/systemd/system/rc-local.service /etc/systemd/system/rc-local.service
 touch /etc/rc.local
 chmod +x /etc/rc.local
@@ -208,23 +210,25 @@ cp -r /home/[path to repo]/sonic_pad_os/out/r818-sonic_lcd/staging_dir/target/ro
 cp -r /home/[path to repo]/sonic_pad_os/out/r818-sonic_lcd/staging_dir/target/rootfs/lib/modules/ rootfs/lib/
 ```
 
-Edit rootfs `/etc/rc.local`:
+Edit `rootfs/etc/rc.local`:
 
-You will need to load GPU, Wifi, configure dhclient, you can find an example here.
+You will need to load GPU, Wifi, configure dhclient, you can find an example at this repo: `scripts/rc.local`
 
-Edit rootfs `/etc/wpa_supplicant.conf`:
+Create `rootfs/etc/wpa_supplicant.conf`:
 
-Generate a valid conf, you can find an example here.
+Generate a valid conf, you can find an example at this repo: `scripts/wpa_supplicant.conf`
+
 
 Dont forget to exit the root account
 ```
 exit
 ```
+
 ### Replace Rootfs with ours
 
 Assuming you have compiled Tina:
 
-Cd to out folder
+Cd to `out` folder
 ```
 cd sonic_pad_os/out/r818-sonic_lcd/
 ```
@@ -263,7 +267,7 @@ Pack the update image:
 pack
 ```
 
-Flash with using Livesuit or PhoenixSuit
+Flash with Livesuit or PhoenixSuit
 
 ### After flash
 
@@ -277,7 +281,8 @@ sudo resize2fs /dev/mmcblk0p7
 ```
 df -h
 ```
-# Install Klipper/Mainsail and Klipper Screen
+
+# Install Klipper, Mainsail and KlipperScreen
 
 Please refer to the installation instructions of KIAUH: https://github.com/th33xitus/kiauh
 
@@ -298,6 +303,9 @@ Section "Device"
         Option          "SwapbuffersWait" "true"
 EndSection
 ```
+
+Finally, reboot the pad.
+
 ----------------------------------------------------------
 # Misc.
 
@@ -332,7 +340,11 @@ USAGE: brightness [OPTIONS] [value]
 * SPI port for Accelerometer
 * Ethernet* managed to get an IP but needs configuring.
 
+### Considerations
 
+Since we are using a R/W fs, we need to avoid shutting down the pad un-gracefully, it can corrupt your fs and you are going to need to reflash it.
+
+Please use KlipperScreen to turn off the Pad, then press the side-button to cut the power.
 
 
 
