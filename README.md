@@ -15,7 +15,7 @@ Please visit the following links to learn more:
 
 **Please take in mind that this will certainly void your warranty and is not endorse by Creality in any way.**
 
-
+----------------------------------------------------------
 # Recommendations
 
 ## Flash the recovery image
@@ -34,10 +34,13 @@ You will need trust the developer of the flasher otherwise it won't let you open
 
 You will need to re-open the executable multiple times and trust the author.
 
-## UART
+### UART
 
-I seriously recommend buying a cheap UART to USB adapter and soldering wires to the exposed pads at the bottom of the PCB.
---------------------------------------------------------------------------------------------------------------------------
+I seriously recommend buying a cheap UART to USB adapter and soldering wires to the exposed pads at the bottom of the PCB. While not necessary it gives you a shell in case SSH or networking didn't work. 
+
+According to chinese guys at https://aw-ol.com forums, fbcon is borked so no shell to the display hence the recommendation for a UART adapter
+
+----------------------------------------------------------
 # Preparation
 
 ## Compile Tina
@@ -46,7 +49,7 @@ Please refer to the repository for the CrealityOS: https://github.com/CrealityTe
 
 Follow their instructions to compile it, additionally you can try to flash it just to see if it works.
 
-## Configure Tina
+### About the procedure:
 
 Using mainline's kernel is out of the question since it requires serious patching because of the lack of support of the SOC (R818). 
 
@@ -102,6 +105,22 @@ make
   
 Make sure that it compiled, and a `rootfs.img` file was generate at `sonic_pad_os/out/r818-sonic_lcd/`
 
+### Configure partitions
+
+cd into the root of the `sonic_pad_os` repo and edit the following file:
+```
+device/config/chips/r818/configs/sonic_lcd/linux/sys_partition.fex
+```
+
+Remove the partitions after `rootfs` and increase the size for the `rootfs` partition, example:
+```
+...
+[partition]
+    name         = rootfs
+    size         = 14542431
+    downloadfile = "rootfs.fex"
+    user_type    = 0x8000
+```
 
 ### Create a Debian RootFS
 
@@ -133,6 +152,9 @@ The following is meant to be run inside the `chrooted rootfs`:
 
 # Set hostname
 echo "SonicPad" > /etc/hostname
+
+# Set hostname in hosts file
+echo "127.0.1.1 SonicPad" >> /etc/hosts
 
 # Configure root password:
 passwd
@@ -198,8 +220,6 @@ Dont forget to exit the root account
 ```
 exit
 ```
-
-
 ### Replace Rootfs with ours
 
 Assuming you have compiled Tina:
@@ -220,7 +240,6 @@ Delete Tina `rootfs` contents
 cd mountfs
 sudo rm -rf *
 ```
-
 Copy our rootfs to the mount dir
 ```
 sudo -i
@@ -232,16 +251,14 @@ Unmount image
 ```
 sudo umount mountfs
 ```
-
 Repair image, accept all prompts
 ```
 tune2fs -O^resize_inode rootfs.img
 fsck.ext4 rootfs.img
 ```
 
-### Pack and flash
+Pack the update image:
 
-cd into the root of the repo and run:
 ```
 pack
 ```
@@ -260,18 +277,60 @@ sudo resize2fs /dev/mmcblk0p7
 ```
 df -h
 ```
+# Install Klipper/Mainsail and Klipper Screen
 
+Please refer to the installation instructions of KIAUH: https://github.com/th33xitus/kiauh
 
-### Misc.
+**After installing KlipperScreen, don't shutdown or reboot the pad.**
 
-#### Brightness
+Create a config for X11:
+```
+sudo nano /etc/X11/xorg.conf
+```
+
+And add the following:
+```
+Section "Device"
+        Identifier      "Allwinner R818 FBDEV"
+        Driver          "fbdev"
+        Option          "fbdev" "/dev/fb0"
+
+        Option          "SwapbuffersWait" "true"
+EndSection
+```
+----------------------------------------------------------
+# Misc.
+
+### Areas of opportunity (Any PR is welcome) / TODOS
+
+* Networking: Improve the way to configure `wlan0` and configure DHCP, I tried to use NetworkManager but it didn't play well with the drivers
+* Idle timeout: Creality has a script to turn off the display after 2 min of inactivity
+* Replace the rootfs inside Tina SDK to avoid hacking the compiled img
+* Create a prebuilt images ready to be flash
+* Create a script to auto-mount a USB flashdrive to load `wpa_supplicant.conf`
+
+### Brightness
+
+A hacky way to control the display brightness is by using a CLI, the following code was sourced from Creality's repo.
 
 Cross-compile or compile directly with the Pad, the `brightness.c` file located in this repo.
 
 Example usage:
 ```
 ./brightness -h 
+USAGE: brightness [OPTIONS] [value]
+                     -s backlight switch [0|1]
+                     -d dev mode range [0-255]
+                     -v range default [0-100]
+
 ```
+
+### To be tested
+
+* Bluetooth (?) Dunno why you would need it but i haven't tested it
+* Audio
+* SPI port for Accelerometer
+* Ethernet* managed to get an IP but needs configuring.
 
 
 

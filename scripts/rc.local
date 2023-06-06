@@ -1,5 +1,9 @@
 #!/bin/bash
 
+fsck -p /dev/mmcblk0p7
+
+mount -o remount, rw /
+
 insmod /lib/modules/4.9.191/pvrsrvkm.ko
 insmod /lib/modules/4.9.191/dc_sunxi.ko
 insmod /lib/modules/4.9.191/xr819_mac.ko
@@ -12,4 +16,4 @@ ifconfig wlan0 up
 ifconfig wlan0 up # Needs to be called twice, dunno why it fails the first time
 
 wpa_supplicant -D nl80211 -i wlan0 -c /etc/wpa_supplicant.conf  -B
-dhclient -v wlan0
+dhclient -v wlan0 &
