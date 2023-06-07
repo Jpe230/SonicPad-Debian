@@ -258,6 +258,7 @@ sudo umount mountfs
 Repair image, accept all prompts
 ```
 tune2fs -O^resize_inode rootfs.img
+e2fsck -f rootfs.img
 fsck.ext4 rootfs.img
 ```
 
