@@ -337,7 +337,7 @@ USAGE: brightness [OPTIONS] [value]
 
 * Bluetooth (?) Dunno why you would need it but i haven't tested it
 * Audio
-* SPI port for Accelerometer
+* ~~SPI port for Accelerometer~~ Confirm working, please read: https://www.klipper3d.org/Measuring_Resonances.html
 * Ethernet* managed to get an IP but I hadn't bothered configuring it. Should work OOB
 
 ### Considerations
