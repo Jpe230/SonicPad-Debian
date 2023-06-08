@@ -168,6 +168,7 @@ apt update
 apt install git net-tools wpasupplicant build-essential locales openssh-server wget libssl-dev sudo
 
 # Install cmake for klipperscreen:
+cd
 wget https://github.com/Kitware/CMake/releases/download/v3.26.4/cmake-3.26.4.tar.gz
 tar -xvzf cmake-3.26.4.tar.gz
 rm cmake-3.26.4.tar.gz
