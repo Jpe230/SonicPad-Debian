@@ -22,8 +22,6 @@ Please visit the following links to learn more:
 
 While not neccesary, it is recommended to flash the recovery image just to test the provided tools by Creality.
 
-You will need a USB-A to USB-A cable. They can be found easily at Amazon.
-
 The recovery image is located at [Creality's repo](https://github.com/CrealityOfficial/Creality_Sonic_Pad_Firmware/tree/main/imgs)
 
 Please use their instructions in how to set the drivers.
@@ -38,7 +36,7 @@ You will need to re-open the executable multiple times and trust the author.
 
 I seriously recommend buying a cheap UART to USB adapter and soldering wires to the exposed pads at the bottom of the PCB. While not necessary it gives you a shell in case SSH or networking didn't work. 
 
-According to chinese guys at https://aw-ol.com forums, fbcon is borked so no shell to the display hence the recommendation for a UART adapter
+According to chinese guys at https://bbs.aw-ol.com forums, fbcon is borked so no shell to the display hence the recommendation for a UART adapter
 
 ----------------------------------------------------------
 # Preparation
