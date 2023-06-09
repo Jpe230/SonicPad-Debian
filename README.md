@@ -44,7 +44,6 @@ I'm not responsible for bricked devices, failed prints, etc. This is merely a pl
 You will need:
 * USB A - USB A Cable
 
-
 ## Flashing the Soinc Pad
 
 Please refer to [Creality's repo](https://github.com/CrealityOfficial/Creality_Sonic_Pad_Firmware) for flashing instructions as well as the tools neccesary for it.
@@ -70,11 +69,11 @@ df -h
 ```
 kiauh/kiauh.sh
 ```
-7) Additionally, if you are planning in compiling, or measuring resonance with Klipper, please install the following packages;
+6) Additionally, if you are planning in compiling, or measuring resonance with Klipper, please install the following packages;
 ```
 sudo apt install binutils-arm-none-eabi libnewlib-arm-none-eabi libstdc++-arm-none-eabi-newlib gcc-arm-none-eabi
 ```
-6) Configure Klipper :)
+7) Configure Klipper :)
 
 
 # How to build your own Distro
