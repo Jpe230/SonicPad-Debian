@@ -21,7 +21,6 @@ A prebuilt image is available at the "Releases" tab.
 The image is configured with:
 * Klipper
 * Moonraker
-* Mainsail
 * KliipperScreen
 
 You can use [KIAUH](https://github.com/th33xitus/kiauh) to update/install more components.
@@ -67,7 +66,11 @@ sudo resize2fs /dev/mmcblk0p5
 ```
 df -h
 ```
-5) Additionally, if you are planning in compiling, or measuring resonance with Klipper, please install the following packages;
+5) Install your frontend of choice using KIAUH:
+```
+kiauh/kiauh.sh
+```
+7) Additionally, if you are planning in compiling, or measuring resonance with Klipper, please install the following packages;
 ```
 sudo apt install binutils-arm-none-eabi libnewlib-arm-none-eabi libstdc++-arm-none-eabi-newlib gcc-arm-none-eabi
 ```
