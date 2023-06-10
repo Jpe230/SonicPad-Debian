@@ -95,7 +95,7 @@ sudo -i
 sudo apt-get install qemu-user-static debootstrap
 
 # Use `debootstrap` to create a basic rootfs:
-debootstrap --no-check-gpg --foreign --verbose --arch=armhf bullseys rootfs http://deb.debian.org/debian/
+debootstrap --no-check-gpg --foreign --verbose --arch=armhf bullseyes rootfs http://deb.debian.org/debian/
 
 # Copy qemu into the rootfs:
 cp /usr/bin/qemu-arm-static rootfs/usr/bin/
