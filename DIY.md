@@ -95,7 +95,7 @@ sudo -i
 sudo apt-get install qemu-user-static debootstrap
 
 # Use `debootstrap` to create a basic rootfs:
-debootstrap --no-check-gpg --foreign --verbose --arch=armhf buster rootfs http://deb.debian.org/debian/
+debootstrap --no-check-gpg --foreign --verbose --arch=armhf bullseys rootfs http://deb.debian.org/debian/
 
 # Copy qemu into the rootfs:
 cp /usr/bin/qemu-arm-static rootfs/usr/bin/
@@ -123,19 +123,7 @@ passwd
 apt update
 
 # Install utils packages
-apt install git net-tools wpasupplicant build-essential locales openssh-server wget libssl-dev sudo
-
-# Install cmake for klipperscreen:
-cd
-wget https://github.com/Kitware/CMake/releases/download/v3.26.4/cmake-3.26.4.tar.gz
-tar -xvzf cmake-3.26.4.tar.gz
-rm cmake-3.26.4.tar.gz
-cd cmake-3.26.4
-./bootstrap
-make
-make install
-cd ../
-rm -rf cmake-3.26.4
+apt install git net-tools build-essential locales openssh-server wget libssl-dev sudo network-manager systemd-timesyncd
 
 # Configure fstab:
 echo "PARTLABEL="rootfs" / ext4 noatime,lazytime,rw 0 0" > /etc/fstab
@@ -150,13 +138,24 @@ systemctl enable rc.local
 mkdir /etc/wifi
 echo "FC:EE:92:11:14:05" > /etc/wifi/xr_wifi.conf
 
-# Clean cache
-apt clean
-rm -rf /var/cache/apt/
+# Dont manage p2p0 interface
+echo "[keyfile]" > /etc/NetworkManager/conf.d/99-unmanaged-devices.conf
+echo "unmanaged-devices=interface-name:p2p0" >> /etc/NetworkManager/conf.d/99-unmanaged-devices.conf
+
+# Load Kernel modules
+echo "pvrsrvkm" >> /etc/modules
+echo "dc_sunxi" >> /etc/modules
+echo "xr819_mac" >> /etc/modules
+echo "xr819_core" >> /etc/modules
+echo "xr819_wlan" >> /etc/modules
 
 # Configure user
 adduser <your username>
 usermod -aG sudo <your username>
+
+# Clean cache
+apt clean
+rm -rf /var/cache/apt/
 
 # Exit roofs
 exit
@@ -169,16 +168,28 @@ cp -r /home/[path to repo]/sonic_pad_os/out/r818-sonic_lcd/staging_dir/target/ro
 cp -r /home/[path to repo]/sonic_pad_os/out/r818-sonic_lcd/staging_dir/target/rootfs/lib/modules/ rootfs/lib/
 ```
 
-Edit `rootfs/etc/rc.local`:
+Enter againt to the chrooted rootfs and run `depmod`
+```
+LC_ALL=C LANGUAGE=C LANG=C chroot rootfs
 
-You will need to load GPU, Wifi, configure dhclient, you can find an example at this repo: `scripts/rc.local`
+# To be run inside the chrooted rootfs: 
+depmod 4.9.191
 
-Create `rootfs/etc/wpa_supplicant.conf`:
+# exit rootfs
+exit
+```
 
-Generate a valid conf, you can find an example at this repo: `scripts/wpa_supplicant.conf`
+If you would like to use WiFi out-of-the-box, create a configurtation for NetworkManager:
 
+> Please create a valid profile in key format for NetworkManager, see [RedHat's guide for more information](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/9/html/configuring_and_managing_networking/assembly_manually-creating-networkmanager-profiles-in-keyfile-format_configuring-and-managing-networking)
 
-Dont forget to exit the root account
+There are 2 sample services located at the folder `scripts`
+ * `led_mmc` to enable the blue light as an EMMC activity led
+ * `usb_host` to enable the "CAM" port as a USB Host port
+
+Enable them if you wish.
+
+Dont forget to exit the root account!
 ```
 exit
 ```
@@ -231,15 +242,20 @@ Flash with Livesuit or PhoenixSuit
 
 ## After flash
 
-1) Get the IP of the Pad with help of your router, or by any other means
-2) SSH Into
-3) Once logged in, resize the fs using: (double check that the partition is correct!!!!)
+1) If you didn't configure WiFi, please connect the Pad to ethernet
+2) Get the IP of the Pad with help of your router, or by any other means
+3) SSH Into
+4) Once logged in, resize the fs using: (Replace X with the correct partition)
 ```
-sudo resize2fs /dev/mmcblk0p7
+sudo resize2fs /dev/mmcblk0pX
 ```
-4) Verify disk space with:
+5) Verify disk space with:
 ```
 df -h
+```
+6) If you wish to perform automatic file system check;
+```
+sudo tune2fs -c 1 /dev/mmcb1k0pX
 ```
 
 ## Install Klipper, Mainsail and KlipperScreen

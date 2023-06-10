@@ -1,0 +1,9 @@
+[Unit]
+Description=MMC Status LED
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/ledmmc_enable.sh
+
+[Install]
+WantedBy=multi-user.target

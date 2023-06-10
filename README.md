@@ -14,14 +14,21 @@ Please visit the following links to learn more:
 * Mainsail (Web Interface): https://docs.mainsail.xyz/ 
 * KlipperScreen (Screen Interface): https://klipperscreen.readthedocs.io/ 
 
-# Prebuilt Debian 10 Buster
+# Prebuilt Debian 11 Bullseye
 
 A prebuilt image is available at the "Releases" tab.
+
+The image is built by using the steps detailed in the [DIY section](https://github.com/Jpe230/SonicPad-Debian/blob/main/DIY.md).
 
 The image is configured with:
 * Klipper
 * Moonraker
 * KliipperScreen
+
+It also includes:
+* USB host service (To use the CAM port as USB host port)
+* u-boot-tools
+* Brightness CLI 
 
 You can use [KIAUH](https://github.com/th33xitus/kiauh) to update/install more components.
 
