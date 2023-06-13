@@ -1,9 +1,0 @@
-[Unit]
-Description=USB Host Service
-
-[Service]
-Type=simple
-ExecStart=/usr/local/bin/usbhost_enable.sh
-
-[Install]
-WantedBy=multi-user.target

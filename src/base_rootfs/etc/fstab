@@ -1,0 +1,1 @@
+PARTLABEL="rootfs" / ext4 noatime,lazytime,rw 0 0
