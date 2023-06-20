@@ -30,7 +30,7 @@ start_spinner "Creating ext4 partition"
 {
     mkdir -p $TEMP_DIR
     rm -f $EXT4_IMG
-    $TOOLS_DIR/make_ext4fs -l $IMG_SIZE -b $BLOCKS -i $INODES -m 0 $EXT4_IMG $ROOTFS_DIR #The "dragon" doesnt like images made without their stupid tool
+    $TOOLS_DIR/make_ext4fs -l $IMG_SIZE -b $BLOCKS -i $INODES -m 0 $EXT4_IMG #The "dragon" doesnt like images made without their stupid tool
     rm -f $ROOTFS_IMG
     dd if=$EXT4_IMG of=$ROOTFS_IMG bs=128k conv=sync
     rm -f $EXT4_IMG
@@ -38,6 +38,18 @@ start_spinner "Creating ext4 partition"
 stop_spinner
 
 echo "Done creating ext4 partition"
+
+start_spinner "Copying partitions"
+{
+    mkdir -p $MOUNT_POINT
+    mount -o loop $ROOTFS_IMG $MOUNT_POINT
+    cp -rfp $ROOTFS_DIR/* $MOUNT_POINT
+    umount $MOUNT_POINT
+    rm -r $MOUNT_POINT
+} &> $SHELLTRAP
+stop_spinner
+
+echo "Done copying rootfs"
 
 start_spinner "Fixing img"
 {

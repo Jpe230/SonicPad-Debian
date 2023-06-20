@@ -58,5 +58,7 @@ sudo apt clean
 sudo rm -rf /var/cache/apt/
 sudo rm -rf ~/.cache
 
+sudo update-ca-certificates
+
 echo "Fixing permissions"
 sudo chown -R $USER /home/$USER

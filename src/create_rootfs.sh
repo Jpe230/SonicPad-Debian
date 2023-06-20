@@ -115,6 +115,7 @@ start_spinner "Installing Klipper, Moonraker, KlipperScreen"
     LC_ALL=C LANGUAGE=C LANG=C chroot $ROOTFS_DIR /bin/su -c "cd /home/$L_USERNAME/scripts && ./install_services.sh" - $L_USERNAME
     LC_ALL=C LANGUAGE=C LANG=C chroot $ROOTFS_DIR /bin/bash -c "sed -i '$ d' /etc/sudoers"
     LC_ALL=C LANGUAGE=C LANG=C chroot $ROOTFS_DIR /bin/bash -c "rm -rf /home/$L_USERNAME/scripts"
+    LC_ALL=C LANGUAGE=C LANG=C chroot $ROOTFS_DIR /bin/bash -c "echo 'sonic ALL = NOPASSWD:/bin/brightness' >> /etc/sudoers"
 } &> $SHELLTRAP
 stop_spinner
 
