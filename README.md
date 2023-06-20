@@ -46,6 +46,12 @@ The following packages pre-installed:
 ssh sonic@<your ip>
 ```
 
+5. Expand your partition
+
+```
+sudo resize2fs /dev/mmcblk0p5
+```
+
 5. Install your frontend of choice using KIAUH:
 >Please refer to [th33xitus's repo](https://github.com/th33xitus/kiauh) for more detailed instructions.
 
