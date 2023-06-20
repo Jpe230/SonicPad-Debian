@@ -1,1 +1,6 @@
 src/rootfs/
+src/prebuilt/*.img
+src/temp/
+src/prebuilt_kernel/images/rootfs.img
+src/prebuilt_kernel/tina_r818-sonic_lcd_uart0.img
+src/out/

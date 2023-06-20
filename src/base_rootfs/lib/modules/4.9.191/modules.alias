@@ -1,0 +1,13 @@
+# Aliases extracted from modules themselves.
+alias devname:fuse fuse
+alias char-major-10-229 fuse
+alias fs-fuseblk fuse
+alias fs-fuse fuse
+alias fs-fusectl fuse
+alias xradio_core xr819_core
+alias xradio_wlan xr819_core
+alias platform:rgxsunxi pvrsrvkm
+alias of:N*T*Cimg,gpuC* pvrsrvkm
+alias of:N*T*Cimg,gpu pvrsrvkm
+alias xradio_wlan xr819_wlan
+alias fs-exfat exfat
