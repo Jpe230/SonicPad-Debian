@@ -1,0 +1,7 @@
+fuse.ko:
+dc_sunxi.ko: pvrsrvkm.ko
+xr819_core.ko: xr819_mac.ko
+pvrsrvkm.ko:
+xr819_mac.ko:
+xr819_wlan.ko: xr819_core.ko xr819_mac.ko
+exfat.ko:

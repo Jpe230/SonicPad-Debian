@@ -1,139 +1,139 @@
-# SonicPad Debian
+<p align="center">
+  <a href="https://github.com/Jpe230/SonicPad-Debian/" title="SonicPad Logo">
+    <img src="https://github.com/Jpe230/SonicPad-Debian/assets/6202305/ce559b28-9835-4447-809d-594a5bb70847" width="200px" alt="SonicPad Logo"/>
+  </a>
+</p>
+<h1 align="center">🌟 SonicPad Debian 🌟</h1>
+<p align="center">Port of Debian for the SonicPad (Allwinner R818)</p>
 
+<h2 align="center">🌐 Links 🌐</h2>
+<p align="center">
+    <a href="https://github.com/Jpe230/SonicPad-Debian/releases" title="Releases">📂 Releases</a>
+    ·
+    <a href="https://github.com/Jpe230/SonicPad-Debian/issues/new/choose" title="Report Bug/Request Feature">🐛 Got an issue</a>
+    .
+    <a href="https://github.com/Jpe230/SonicPad-Debian/pulls" title="PR">🚀 Contribute a new feature </a>
+</p>
 
-# About
+## 🚀 Features
 
-A repo with a set of steps to replace the existing OS (OpenWRT/Tina Linux/CrealityOS) with Debian.
+Ready to go Debian 11 Bullseye Image for the SonicPad!
 
-The main goal is to achieve the use of the maiinline sources for Klipper, Mainsail, Fluidd and KlipperScreen.
+The following packages pre-installed:
 
-Please visit the following links to learn more:
+- **Klipper: https://www.klipper3d.org/**
+- **Moonraker: https://moonraker.readthedocs.io/**
+- **KlipperScreen: https://klipperscreen.readthedocs.io/**
 
-* Klipper (Operating System): https://www.klipper3d.org/ 
-* Moonraker (API Web Server): https://moonraker.readthedocs.io/ 
-* Mainsail (Web Interface): https://docs.mainsail.xyz/ 
-* KlipperScreen (Screen Interface): https://klipperscreen.readthedocs.io/ 
+## 🎚️ Prerequisites
 
-# Prebuilt Debian 11 Bullseye
+- USB-A to USB-A Cable
+- A Windows/Linux/macOS device to flash the SonicPad
 
-A prebuilt image is available at the "Releases" tab.
+## 🛠️ Installation Steps
 
-The image is built by using the steps detailed in the [DIY section](https://github.com/Jpe230/SonicPad-Debian/blob/main/DIY.md).
+1. Download the lastest [release image](https://github.com/Jpe230/SonicPad-Debian/releases)
 
-The image is configured with:
-* Klipper
-* Moonraker
-* KliipperScreen
+2. Flash the Sonic Pad
 
-It also includes:
-* USB host service (To use the CAM port as USB host port)
-* u-boot-tools
-* Brightness CLI 
+>Please refer to [Creality's repo](https://github.com/CrealityOfficial/Creality_Sonic_Pad_Firmware) for a more detailed instructions as well as the tools neccesary for it.
 
-You can use [KIAUH](https://github.com/th33xitus/kiauh) to update/install more components.
+3. In KlipperScreen, configure your WIFI network and get the IP of the Pad
 
-The following libraries/packages are **missing** to reduce the size of the image, please install them if you need them:
-* binutils-arm-none-eabi   
-* libnewlib-arm-none-eabi
-* libstdc++-arm-none-eabi-newlib
-* gcc-arm-none-eabi
+4. SSH into the pad, the default login password is: `pad`
 
-## Disclaimer
-
-I'm not responsible for bricked devices, failed prints, etc. This is merely a place where I can share a personal project with the rest of the world.
-* YOU are choosing to make these modifications, by no means I'm forcing you to replace the OS of you pad.
-* The prebuilt image is "as-is", meaning, I don't plan to give it a long-term support, bugs or errors aren't my resposability.
-
-**Please take in mind that this will certainly void your warranty and is not endorse by Creality in any way.**
-
-## Prerequisites
-
-You will need:
-* USB A - USB A Cable
-
-## Flashing the Soinc Pad
-
-Please refer to [Creality's repo](https://github.com/CrealityOfficial/Creality_Sonic_Pad_Firmware) for flashing instructions as well as the tools neccesary for it.
-
-## Post-Flashing
-
-The Sonic Pad should boot directly to KlipperScreen, we need to SSH to finish configuring it.
-
-1) In KlipperScreen, configure your WIFI network and get the IP of the Pad
-2) SSH into the pad
-```
+```bash
 ssh sonic@<your ip>
 ```
-3) Expand the filesystem:
+
+5. Install your frontend of choice using KIAUH:
+>Please refer to [th33xitus's repo](https://github.com/th33xitus/kiauh) for more detailed instructions.
+
+6. Additionally, if you are planning in compiling, or measuring resonance with Klipper, please install the following packages:
 ```
-sudo resize2fs /dev/mmcblk0p5
+sudo apt install avrdude gcc-avr binutils-avr avr-libc stm32flash binutils-arm-none-eabi libnewlib-arm-none-eabi libstdc++-arm-none-eabi-newlib gcc-arm-none-eabi
 ```
-4) Verify disk space with:
+
+> ❗ These packages take a lot space. I recommend using a different host to build a firmware for your printer ❗
+
+>
+
+7. Configure your printer! 😁
+
+
+**🎇 You are Ready to Go!**
+
+## ❗ Available Commands
+
+The prebuilt includes a CLI to control de brightness, to see its usage please run:
+
+```Bash
+sudo brightness -h
 ```
-df -h
-```
-5) Install your frontend of choice using KIAUH:
-```
-kiauh/kiauh.sh
-```
-6) Additionally, if you are planning in compiling, or measuring resonance with Klipper, please install the following packages;
+
+## 📂 Directory Structure
+
+> [`src`](https://github.com/Jpe230/SonicPad-Debian/blob/main/src "src"): Scripts necessary to build a rootfs.
+
+> [`src/prebuilt_kernel`](https://github.com/Jpe230/SonicPad-Debian/blob/main/src/prebuilt_kernel "src/prebuilt"): Prebuilt Kernel and tools necessary to pack the final image
+
+> [`src/base_rootfs`](https://github.com/Jpe230/SonicPad-Debian/blob/main/src/base_rootfs "src/base_rootfs"): Files that are needed to be copied to the built rootfs 
+
+> [`src/scripts`](https://github.com/Jpe230/SonicPad-Debian/blob/main/src/scripts "src/scripts"): Scripts to install Klipper, Moonraker, KlipperScreen
+
+❗Want to build your own rootfs? Please see the [DIY Section](https://github.com/Jpe230/SonicPad-Debian/blob/main/DIY.md)
+
+## 🎊 Future Updates
+
+- [ ] Idle timeout: Creality has a script to turn off the display after 2 min of inactivity
+
+- [x] ~~Replace the rootfs inside Tina SDK to avoid hacking the compiled img~~
+
+- [x] ~~Create a prebuilt images ready to be flash~~
+
+- [x] ~~Create a script to auto-mount a USB flashdrive to load `wpa_supplicant.conf`~~ Not needed
+
+## 🪲 Known bugs
+
+- Incorrect Interface shown in KlipperScreen
+
+- Current IP doesn't show in KlipperScreen
+
+## 👀 Disclaimers
+
+Since we are using a R/W partition, we need to avoid shutting down the pad un-gracefully, it can corrupt your fs and you are going to need to reflash it.
+
+>**Please use KlipperScreen to turn off the Pad, then press the side-button to cut the power.**
+--------------------------
+
+if you are planning in compiling, or measuring resonance with Klipper, please install the following packages:
 ```
 sudo apt install binutils-arm-none-eabi libnewlib-arm-none-eabi libstdc++-arm-none-eabi-newlib gcc-arm-none-eabi
 ```
-7) Configure Klipper :)
+
+## 🤝 Support
+
+- Contributions are most welcome!
+
+I'm not responsible for bricked devices, failed prints, etc. This is merely a place where I can share a personal project with the rest of the world.
+
+- YOU are choosing to make these modifications, by no means I'm forcing you to replace the OS of you pad.
+- The prebuilt image is "as-is", meaning, I don't plan to give it a long-term support, bugs or errors aren't my resposability.
+
+**Please take in mind that this will certainly void your warranty and is not endorse by Creality in any way.**
 
 
-# How to build your own Distro
+## 🪙 Credits
 
-Please visit [this section](https://github.com/Jpe230/SonicPad-Debian/blob/main/DIY.md) for a detailed walkthrough
+- The scripts used for installing Klipper are based on the great work of [KIAUH](https://github.com/th33xitus/kiauh)
+
+- The CLI tool for controlling the brightness is taken from [Creality's repo](https://github.com/CrealityTech/sonic_pad_os)
+
+- Klipper: https://www.klipper3d.org/
+
+- Moonraker: https://moonraker.readthedocs.io/ 
+
+- KlipperScreen: https://klipperscreen.readthedocs.io/
 
 
-# Misc.
 
-## Areas of opportunity (Any PR is welcome) / TODOS
-
-- [ ] Idle timeout: Creality has a script to turn off the display after 2 min of inactivity
-- [ ] Replace the rootfs inside Tina SDK to avoid hacking the compiled img
-- [x] ~~Create a prebuilt images ready to be flash~~
-- [x] ~~Create a script to auto-mount a USB flashdrive to load `wpa_supplicant.conf`~~ Not needed
-
-## To be tested
-
-- [ ] Bluetooth (?) Dunno why you would need it but i haven't tested it
-- [ ] Audio
-- [x] ~~SPI port for Accelerometer~~ Please read: https://www.klipper3d.org/Measuring_Resonances.html
-- [x] ~~Ethernet* managed to get an IP but I hadn't bothered configuring it. Should work OOB~~
-
-## Brightness
-
-A hacky way to control the display brightness is by using a CLI, the following code was sourced from Creality's repo.
-
-Cross-compile or compile directly with the Pad, the `brightness.c` file located in this repo.
-
-Example usage:
-```
-./brightness -h 
-USAGE: brightness [OPTIONS] [value]
-                     -s backlight switch [0|1]
-                     -d dev mode range [0-255]
-                     -v range default [0-100]
-
-```
-
-### Considerations
-
-Since we are using a R/W fs, we need to avoid shutting down the pad un-gracefully, it can corrupt your fs and you are going to need to reflash it.
-
-Please use KlipperScreen to turn off the Pad, then press the side-button to cut the power.
-
-## Flashing with macOS
-
-You will need trust the developer of the flasher otherwise it won't let you open the executable.
-
-You will need to re-open the executable multiple times and trust the author.
-
-## UART
-
-I seriously recommend buying a cheap UART to USB adapter and soldering wires to the exposed pads at the bottom of the PCB. While not necessary it gives you a shell in case SSH or networking didn't work. 
-
-According to chinese guys at https://aw-ol.com forums, fbcon is borked so no shell to the display hence the recommendation for a UART adapter

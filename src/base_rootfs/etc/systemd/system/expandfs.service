@@ -1,0 +1,12 @@
+[Unit]
+Description=Expand FS
+Before=basic.target
+After=local-fs.target sysinit.target
+DefaultDependencies=no
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/expandfs_enable.sh
+
+[Install]
+WantedBy=multi-user.target

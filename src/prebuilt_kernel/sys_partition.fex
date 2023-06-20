@@ -1,0 +1,35 @@
+[mbr]
+size = 512
+
+[partition_start]
+
+[partition]
+    name         = boot-resource
+    size         = 8192
+    downloadfile = "boot-resource.fex"
+    user_type    = 0x8000
+
+[partition]
+    name         = env
+    size         = 1024
+    downloadfile = "env.fex"
+    user_type    = 0x8000
+
+[partition]
+    name         = env-redund
+    size         = 1024
+    downloadfile = "env.fex"
+    user_type    = 0x8000
+
+[partition]
+    name         = bootA
+    size         = 61440
+    downloadfile = "boot.fex"
+    user_type    = 0x8000
+
+[partition]
+    name         = rootfs
+    size         = 14542431
+    downloadfile = "rootfs.fex"
+    user_type    = 0x8000
+

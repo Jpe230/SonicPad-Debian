@@ -1,0 +1,9 @@
+[Unit]
+Description=Depmod on boot
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/depmod_enable.sh
+
+[Install]
+WantedBy=multi-user.target
