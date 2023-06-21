@@ -38,6 +38,8 @@ function patch_klipperscreen_update_manager()
         if ! grep -Eq "^\[update_manager KlipperScreen\]\s*$" "${conf}"; then
             ### add KlipperScreens update manager section to moonraker.conf
             echo "Adding KlipperScreen to update manager in file:\n       ${conf}"
+            echo "" >> $conf
+            echo "" >> $conf
             echo "[update_manager KlipperScreen]" >> $conf
             echo "type: git_repo" >> $conf
             echo "path: ${HOME}/KlipperScreen" >> $conf
