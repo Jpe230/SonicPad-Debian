@@ -23,7 +23,8 @@ OG_USER=${SUDO_USER:-$(whoami)}
 IMG_SIZE=3000000000
 #IMG_SIZE=2684354560
 BLOCKS=4096
-INODES=100000
+INODES_RATIO=16384
+INODES=$(($IMG_SIZE / $INODES_RATIO))
 #----------------------------------------
 
 start_spinner "Creating ext4 partition"
