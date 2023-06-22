@@ -6,9 +6,6 @@ INSTALLER_DIR="$(dirname -- "$(readlink -f "${BASH_SOURCE[0]}")")"
 SYSTEMD="/etc/systemd/system"
 USER=$(whoami)
 
-echo "Fixing permissions"
-sudo chown -R $USER /home/$USER
-
 echo "Adding hostname to hosts"
 sudo -- sh -c "echo '127.0.1.1 SonicPad' >> /etc/hosts"
 
@@ -49,6 +46,7 @@ sudo -- sh -c "echo 'ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev' > 
 sudo usermod -aG netdev $USER
 
 echo "Compiling brightness..."
+sudo chown -R $USER /home/$USER/scripts
 cd /home/$USER/scripts/resources/brightness
 gcc -o brightness brightness.c
 sudo mv brightness /bin/brightness
@@ -59,6 +57,4 @@ sudo rm -rf /var/cache/apt/
 sudo rm -rf ~/.cache
 
 sudo update-ca-certificates
-
-echo "Fixing permissions"
-sudo chown -R $USER /home/$USER
+sudo c_rehash

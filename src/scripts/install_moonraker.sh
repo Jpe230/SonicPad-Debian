@@ -124,4 +124,6 @@ function install_moonraker()
 
     # 6) Enable service
     sudo systemctl enable moonraker 
+
+    sudo usermod -aG dialout $USER
 }
