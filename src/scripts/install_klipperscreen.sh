@@ -8,7 +8,7 @@ source ./klipper.config
 source ./klipperscreen.config
 
 function klipperscreen_setup() {
-    local branch="master"
+    local branch="sonic_pad"
     if git clone "${KLIPPERSCREEN_REPO}" "${KLIPPERSCREEN_DIR}"; then
         cd "${KLIPPERSCREEN_DIR}" && git checkout "${branch}"
     else
@@ -43,6 +43,7 @@ function patch_klipperscreen_update_manager()
             echo "[update_manager KlipperScreen]" >> $conf
             echo "type: git_repo" >> $conf
             echo "path: ${HOME}/KlipperScreen" >> $conf
+            echo "primary_branch:: sonic_pad" >> $conf
             echo "origin: ${KLIPPERSCREEN_REPO}" >> $conf
             echo "env: ${HOME}/.KlipperScreen-env/bin/python" >> $conf
             echo "requirements: scripts/KlipperScreen-requirements.txt" >> $conf
