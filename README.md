@@ -92,6 +92,59 @@ sudo brightness -h
 ## 🎊 Future Updates
 
 - [ ] Idle timeout: Creality has a script to turn off the display after 2 min of inactivity
+   1. Add this script to home directory via this command:
+     
+    ```Bash
+    cat << 'EOF' > ~/display.sh
+    #!/bin/bash
+
+    #config
+    delay=2 # repeat every 2 seconds
+
+    # init
+
+    read dummy dummy  former_state < <(xset -display :0 -q | grep "Monitor is ")
+    echo $former_state
+    sleep $delay
+
+    #loop
+    while true; do
+      read dummy dummy state < <(xset -display :0 -q | grep "Monitor is ")
+      echo $state
+      [ "$state" = "On" ] || state="Off" # squeeze away suspend/standby, monitor is off
+      if [ "$state" != "$former_state" ]; then
+        if [ "$state" = "On" ]; then
+            brightness -s 1
+        else
+            brightness -s 0
+        fi
+        former_state="$state"
+      fi
+    sleep $delay
+    done
+
+    EOF
+    ```
+    
+   2. Make it executable
+
+    ```Bash
+    chmod +x display.sh
+    ``` 
+   
+   3. Then make this sh run as root at boot through crontab (by appending * * * * * in crontab, since script handles loops with sleep command):
+
+    ```Bash
+    sudo crontab -e
+    ```
+    Add this line at the end of cron file and save:
+
+    ```Bash
+    * * * * * cd /home/sonic/ && ./display.sh
+    ```
+  4. Reboot device. If everything ok, when device suspends this script sets backlight off. when device wakes, it sets backlight on.
+     
+     Do not run the display.sh as "sh display.sh" it would not work. Only run with ./
 
 - [x] ~~Replace the rootfs inside Tina SDK to avoid hacking the compiled img~~
 
