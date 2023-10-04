@@ -95,7 +95,7 @@ sudo brightness -h
    1. Add this script to home directory via this command:
      
     ```Bash
-    cat << 'EOF' > ~/display.sh
+    cat << 'EOF' > ~/display-sleep.sh
     #!/bin/bash
 
     #config
@@ -129,22 +129,43 @@ sudo brightness -h
    2. Make it executable
 
     ```Bash
-    chmod +x display.sh
+    chmod +x display-sleep.sh
     ``` 
    
-   3. Then make this sh run as root at boot through crontab (by appending * * * * * in crontab, since script handles loops with sleep command):
-
+   3. Then make this sh run as root at boot through systemd:
     ```Bash
-    sudo crontab -e
+    sudo nano /etc/systemd/system/display-sleep.service
     ```
-    Add this line at the end of cron file and save:
-
+    Paste this to service file
     ```Bash
-    * * * * * cd /home/sonic/ && ./display.sh
+    [Unit]
+    
+    Description=Display Sleep
+  
+    After=default.target
+    
+    [Service]
+    
+    ExecStart=/home/sonic/display-sleep.sh
+    
+    [Install]
+    
+    WantedBy=default.target
     ```
-  4. Reboot device. If everything ok, when device suspends this script sets backlight off. when device wakes, it sets backlight on.
+
+   4. start and enable system service:
+    ```Bash
+    sudo systemctl start display-sleep.service 
+    ```
+
+    
+    ```Bash
+    sudo systemctl enable display-sleep.service 
+    ```
+    
+   5. If everything ok, when device suspends this script sets backlight off. when device wakes, it sets backlight on.
      
-     Do not run the display.sh as "sh display.sh" it would not work. Only run with ./
+     Do not run the display.sh as "sh display.sh" to test. it would not work. Only run with ./
 
 - [x] ~~Replace the rootfs inside Tina SDK to avoid hacking the compiled img~~
 
