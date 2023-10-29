@@ -1,0 +1,13 @@
+[Unit]
+
+Description=Display Sleep
+
+After=default.target
+
+[Service]
+
+ExecStart=/usr/local/bin/display-sleep.sh
+
+[Install]
+
+WantedBy=default.target
