@@ -71,7 +71,7 @@ sudo apt install avrdude gcc-avr binutils-avr avr-libc stm32flash binutils-arm-n
 
 ## ❗ Available Commands
 
-The prebuilt includes a CLI to control de brightness, to see its usage please run:
+The prebuilt includes a CLI to control the brightness, to see its usage please run:
 
 ```Bash
 sudo brightness -h
@@ -112,7 +112,7 @@ Since we are using a R/W partition, we need to avoid shutting down the pad un-gr
 >**Please use KlipperScreen to turn off the Pad, then press the side-button to cut the power.**
 --------------------------
 
-if you are planning in compiling, or measuring resonance with Klipper, please install the following packages:
+if you are planning on compiling, or measuring resonance with Klipper, please install the following packages:
 ```
 sudo apt install binutils-arm-none-eabi libnewlib-arm-none-eabi libstdc++-arm-none-eabi-newlib gcc-arm-none-eabi
 ```
