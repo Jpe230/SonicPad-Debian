@@ -38,6 +38,10 @@ echo "Enabling USB Host"
 sudo chmod +x /usr/local/bin/usbhost_enable.sh
 sudo systemctl enable usbhost
 
+echo "Enabling screen timeout script"
+sudo chmod +x /usr/local/bin/display-sleep.sh
+sudo systemctl enable display-sleep.service 
+
 # echo "Running depmod"
 # sudo depmod 4.9.191
 
