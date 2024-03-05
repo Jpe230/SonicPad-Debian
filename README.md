@@ -46,11 +46,17 @@ The following packages pre-installed:
 ssh sonic@<your ip>
 ```
 
-5. Expand your partition
+5. Fix timezone:
 
+Run ```timedatectl list-timezones | more``` to see available timezones
+
+To select your timezone:
+
+```bash
+timedatectl set-timezone 'America/Chicago'
 ```
-sudo resize2fs /dev/mmcblk0p5
-```
+
+Finaly reboot the pad
 
 5. Install your frontend of choice using KIAUH:
 >Please refer to [th33xitus's repo](https://github.com/th33xitus/kiauh) for more detailed instructions.
@@ -91,81 +97,7 @@ sudo brightness -h
 
 ## 🎊 Future Updates
 
-- [ ] Idle timeout: Creality has a script to turn off the display after 2 min of inactivity
-   1. Add this script to home directory via this command:
-     
-    ```Bash
-    cat << 'EOF' > ~/display-sleep.sh
-    #!/bin/bash
-
-    #config
-    delay=2 # repeat every 2 seconds
-
-    # init
-
-    read dummy dummy  former_state < <(xset -display :0 -q | grep "Monitor is ")
-    echo $former_state
-    sleep $delay
-
-    #loop
-    while true; do
-      read dummy dummy state < <(xset -display :0 -q | grep "Monitor is ")
-      echo $state
-      [ "$state" = "On" ] || state="Off" # squeeze away suspend/standby, monitor is off
-      if [ "$state" != "$former_state" ]; then
-        if [ "$state" = "On" ]; then
-            brightness -s 1
-        else
-            brightness -s 0
-        fi
-        former_state="$state"
-      fi
-    sleep $delay
-    done
-
-    EOF
-    ```
-    
-   2. Make it executable
-
-    ```Bash
-    chmod +x display-sleep.sh
-    ``` 
-   
-   3. Then make this sh run as root at boot through systemd:
-    ```Bash
-    sudo nano /etc/systemd/system/display-sleep.service
-    ```
-    Paste this to service file
-    ```Bash
-    [Unit]
-    
-    Description=Display Sleep
-  
-    After=default.target
-    
-    [Service]
-    
-    ExecStart=/home/sonic/display-sleep.sh
-    
-    [Install]
-    
-    WantedBy=default.target
-    ```
-
-   4. start and enable system service:
-    ```Bash
-    sudo systemctl start display-sleep.service 
-    ```
-
-    
-    ```Bash
-    sudo systemctl enable display-sleep.service 
-    ```
-    
-   5. If everything ok, when device suspends this script sets backlight off. when device wakes, it sets backlight on.
-     
-     Do not run the display.sh as "sh display.sh" to test. it would not work. Only run with ./
+- [x] ~~Idle timeout: Creality has a script to turn off the display after 2 min of inactivity~~ (Dont forget to change the screen timeout in KlipperScreen)
 
 - [x] ~~Replace the rootfs inside Tina SDK to avoid hacking the compiled img~~
 
