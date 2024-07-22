@@ -109,13 +109,13 @@ echo "Done creating rootfs"
 
 start_spinner "Installing Klipper, Moonraker, KlipperScreen"
 {
-    cp -r scripts $ROOTFS_DIR/home/sonic/
-    chmod +x $ROOTFS_DIR/home/sonic/scripts/*.sh
-    LC_ALL=C LANGUAGE=C LANG=C chroot $ROOTFS_DIR /bin/bash -c "echo 'sonic ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers"
+    cp -r scripts $ROOTFS_DIR/home/$L_USERNAME/
+    chmod +x $ROOTFS_DIR/home/$L_USERNAME/scripts/*.sh
+    LC_ALL=C LANGUAGE=C LANG=C chroot $ROOTFS_DIR /bin/bash -c "echo '$L_USERNAME ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers"
     LC_ALL=C LANGUAGE=C LANG=C chroot $ROOTFS_DIR /bin/su -c "cd /home/$L_USERNAME/scripts && ./install_services.sh" - $L_USERNAME
     LC_ALL=C LANGUAGE=C LANG=C chroot $ROOTFS_DIR /bin/bash -c "sed -i '$ d' /etc/sudoers"
     LC_ALL=C LANGUAGE=C LANG=C chroot $ROOTFS_DIR /bin/bash -c "rm -rf /home/$L_USERNAME/scripts"
-    LC_ALL=C LANGUAGE=C LANG=C chroot $ROOTFS_DIR /bin/bash -c "echo 'sonic ALL = NOPASSWD:/bin/brightness' >> /etc/sudoers"
+    LC_ALL=C LANGUAGE=C LANG=C chroot $ROOTFS_DIR /bin/bash -c "echo '$L_USERNAME ALL = NOPASSWD:/bin/brightness' >> /etc/sudoers"
 } &> $SHELLTRAP
 stop_spinner
 
