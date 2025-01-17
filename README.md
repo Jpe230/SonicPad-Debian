@@ -17,58 +17,44 @@
 
 ## 🚀 Features
 
-Ready to go Debian 11 Bullseye Image for the SonicPad!
+Ready to go Debian 11 Bullseye Image for the SonicPad! Allows you to install the latest, unmodified, versions of software within the Klipper ecosystem.
 
-The following packages pre-installed:
+The following packages are pre-installed:
 
 - **Klipper: https://www.klipper3d.org/**
 - **Moonraker: https://moonraker.readthedocs.io/**
 - **KlipperScreen: https://klipperscreen.readthedocs.io/**
+- **Klipper Install and Update Helper: https://github.com/th33xitus/kiauh/**
 
 ## 🎚️ Prerequisites
 
-- USB-A to USB-A Cable
+- USB-A Male to USB-A Male Cable
 - A Windows/Linux/macOS device to flash the SonicPad
 
 ## 🛠️ Installation Steps
 
-1. Download the lastest [release image](https://github.com/Jpe230/SonicPad-Debian/releases)
+1. Download the latest [release image](https://github.com/Jpe230/SonicPad-Debian/releases)
 
 2. Flash the Sonic Pad
 
->Please refer to [Creality's repo](https://github.com/CrealityOfficial/Creality_Sonic_Pad_Firmware) for a more detailed instructions as well as the tools neccesary for it.
+>Please refer to [`docs/flashing.md`](docs/flashing.md) for detailed instructions.
 
-3. In KlipperScreen, configure your WIFI network and get the IP of the Pad
+3. Using KlipperScreen, configure your WIFI network and get the IP of the Pad
 
-4. SSH into the pad, the default login password is: `pad`
+4. SSH into the pad
 
 ```bash
 ssh sonic@<your ip>
 ```
 
-5. Fix timezone:
+> ℹ️ The default login password is: `pad` 
 
-Run ```timedatectl list-timezones | more``` to see available timezones
+5. (Optional) Configure SonicPad-Debian
+> Documentation for further configuration options, including timezones and accelerometer support can be found in the [`docs/` directory](docs/). 
 
-To select your timezone:
-
-```bash
-timedatectl set-timezone 'America/Chicago'
-```
-
-Finaly reboot the pad
-
-5. Install your frontend of choice using KIAUH:
+6. Install your frontend of choice using KIAUH:
 >Please refer to [th33xitus's repo](https://github.com/th33xitus/kiauh) for more detailed instructions.
 
-6. Additionally, if you are planning in compiling, or measuring resonance with Klipper, please install the following packages:
-```
-sudo apt install avrdude gcc-avr binutils-avr avr-libc stm32flash binutils-arm-none-eabi libnewlib-arm-none-eabi libstdc++-arm-none-eabi-newlib gcc-arm-none-eabi
-```
-
-> ❗ These packages take a lot space. I recommend using a different host to build a firmware for your printer ❗
-
->
 
 7. Configure your printer! 😁
 
@@ -113,15 +99,7 @@ sudo brightness -h
 
 ## 👀 Disclaimers
 
-Since we are using a R/W partition, we need to avoid shutting down the pad un-gracefully, it can corrupt your fs and you are going to need to reflash it.
-
->**Please use KlipperScreen to turn off the Pad, then press the side-button to cut the power.**
---------------------------
-
-if you are planning on compiling, or measuring resonance with Klipper, please install the following packages:
-```
-sudo apt install binutils-arm-none-eabi libnewlib-arm-none-eabi libstdc++-arm-none-eabi-newlib gcc-arm-none-eabi
-```
+⚠️ It should be noted that the SonicPad-Debian firmware, unlike the stock firmware, uses a read/write filesystem. This means that, just like your computer at home, removing the power unexpectedly can damage your files. **Do not use the button on the side of the SonicPad to turn it off.** You must gracefully shutdown using a GUI or by issuing the `shutdown` or `restart` commands ⚠️
 
 ## 🤝 Support
 
