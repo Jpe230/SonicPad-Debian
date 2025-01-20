@@ -24,7 +24,6 @@ The following packages are pre-installed:
 - **Klipper: https://www.klipper3d.org/**
 - **Moonraker: https://moonraker.readthedocs.io/**
 - **KlipperScreen: https://klipperscreen.readthedocs.io/**
-- **Klipper Install and Update Helper: https://github.com/th33xitus/kiauh/**
 
 ## 🎚️ Prerequisites
 
@@ -37,7 +36,7 @@ The following packages are pre-installed:
 
 2. Flash the Sonic Pad
 
->Please refer to [`docs/flashing.md`](docs/flashing.md) for detailed instructions.
+>Please refer to [`docs/flashing.md`](docs/flashing.md) for detailed instructions. 
 
 3. Using KlipperScreen, configure your WIFI network and get the IP of the Pad
 
@@ -52,12 +51,8 @@ ssh sonic@<your ip>
 5. (Optional) Configure SonicPad-Debian
 > Documentation for further configuration options, including timezones and accelerometer support can be found in the [`docs/` directory](docs/). 
 
-6. Install your frontend of choice using KIAUH:
->Please refer to [th33xitus's repo](https://github.com/th33xitus/kiauh) for more detailed instructions.
 
-
-7. Configure your printer! 😁
-
+6. Configure your printer! 😁
 
 **🎇 You are Ready to Go!**
 
@@ -107,10 +102,10 @@ sudo brightness -h
 
 I'm not responsible for bricked devices, failed prints, etc. This is merely a place where I can share a personal project with the rest of the world.
 
-- YOU are choosing to make these modifications, by no means I'm forcing you to replace the OS of you pad.
-- The prebuilt image is "as-is", meaning, I don't plan to give it a long-term support, bugs or errors aren't my resposability.
+- YOU are choosing to make these modifications, by no means I'm forcing you to replace the OS of your pad.
+- The prebuilt image is provided "as-is"-- meaning, I don't plan to give it long-term support and bugs or errors aren't my responsibility.
 
-**Please take in mind that this will certainly void your warranty and is not endorse by Creality in any way.**
+**Please take in mind that this will certainly void your warranty and is not endorsed by Creality in any way.**
 
 
 ## 🪙 Credits
