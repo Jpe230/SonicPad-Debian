@@ -68,7 +68,7 @@ You can leave the software be for now. Do not close it.
 
 4) While pressing the recessed button, turn the SonicPad on.
 
-The screen will remain black, but the light on the side will still illuminate. The device is now in **burning mode**.
+The screen will remain black, but the light on the side will still illuminate. The device is now in **burning mode**. Leave the device be for now.
 
 ### 4) Install Windows Drivers
 
@@ -130,7 +130,7 @@ If all went well, you should see the Debian logo (a red swirl) while the SonicPa
 
     >Eventually, I plan to obtain this software directly from Allwinner and distribute it (with permission) within this repository.
 
-    For now you can find the Linux version here:
+    For now you can find the (as of yet, untested) Linux version here:
 
     http://dl.cubieboard.org/software/tools/livesuit/LiveSuitV306_For_Linux64.zip
 

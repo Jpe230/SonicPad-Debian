@@ -8,7 +8,7 @@ These tools, PhoenixSuit and LiveSuit, are developed by Allwinner and are used t
 
 >Eventually, I plan to obtain this software directly from Allwinner and distribute it (with permission) within this repository.
 
-For now you can find the Linux version here:
+For now you can find the (as of yet, untested) Linux version here:
 
 http://dl.cubieboard.org/software/tools/livesuit/LiveSuitV306_For_Linux64.zip
 
