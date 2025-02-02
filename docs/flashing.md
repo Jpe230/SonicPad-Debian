@@ -105,7 +105,7 @@ Once the flashing process has completed, a message will be shown. It is now safe
 
 >⚠️ It should be noted that the SonicPad-Debian firmware, unlike the stock firmware, uses a read/write filesystem. This means that, just like your computer at home, removing the power unexpectedly can damage your files. Do not use the button on the side of the SonicPad to turn it off. You must gracefully shutdown using a GUI or by issuing the `shutdown` or `restart` commands ⚠️
 
-If all went well, you should see the Debian logo (a red swirl) while the SonicPad reboots. You are done flashing and can now begin configuring. See [the main README for steps on connecting to Wi-Fi and using SSH](/README.md#️-installation-steps). See the [`docs/` directory](docs/) for more information on configuring SonicPad-Debian, including setting a timezone and installing the accelerometer for resonance testing.
+If all went well, you should see the Debian logo (a red swirl) while the SonicPad reboots. You are done flashing and can now begin configuring. See [the main README for steps on connecting to Wi-Fi and using SSH](/README.md#️-installation-steps). See the [`docs/` directory](docs/) for more information on configuring SonicPad-Debian, including setting a timezone, installing the accelerometer for resonance testing, and setting up USB automounting.
 
 
 
