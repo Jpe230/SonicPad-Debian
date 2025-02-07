@@ -6,6 +6,8 @@ The original documentation can be found in the [`officialInstructions/` director
 
  ⚠️ Should you ever need to go back to the official Creality firmware, images can be found in the [CrealityOfficial/Creality_Sonic_Pad_Firmware](https://github.com/CrealityOfficial/Creality_Sonic_Pad_Firmware/) repository ⚠️
 
+[A 2 minute video tutorial](https://www.youtube.com/watch?v=W4cSQND8eSM) is available for those who want a more visual approach.
+
 ## Prerequisites:
 - A computer running Windows/MacOS/Ubuntu
 - USB-A Male to USB-A Male Cable
@@ -34,6 +36,8 @@ Keep track of this file, as we'll need it later.
 
 
 ## Windows
+
+Windows Video Tutorial: https://www.youtube.com/watch?v=W4cSQND8eSM
 
 ### 2) Download and Open PhoenixSuit
 1) Download [`PhoenixSuit_Windows_V1.10.zip`](tools/PhoenixSuit_Windows_V1.10.zip) from the [tools/](tools/) directory.

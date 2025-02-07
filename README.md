@@ -49,10 +49,12 @@ ssh sonic@<your ip>
 > ℹ️ The default login password is: `pad` 
 
 5. (Optional) Configure SonicPad-Debian
-> Documentation for further configuration options, including timezones and accelerometer support can be found in the [`docs/` directory](docs/). 
+> Documentation for further configuration options can be found in the [`docs/` directory](docs/). 
+
+> This is where documentation for accelerometer support, timezones, KIAUH, Fluidd, Crowsnest, and others is found. 
 
 
-6. Configure your printer! 😁
+6. Configure Klipper! 😁
 
 **🎇 You are Ready to Go!**
 
