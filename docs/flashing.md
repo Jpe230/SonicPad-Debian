@@ -38,6 +38,7 @@ Keep track of this file, as we'll need it later.
 ## Windows
 
 Windows Video Tutorial: https://www.youtube.com/watch?v=W4cSQND8eSM
+
 Official Creality Video Tutorial: https://www.youtube.com/watch?v=i0iNu-1b6NI
 
 
