@@ -38,6 +38,8 @@ Keep track of this file, as we'll need it later.
 ## Windows
 
 Windows Video Tutorial: https://www.youtube.com/watch?v=W4cSQND8eSM
+Official Creality Video Tutorial: https://www.youtube.com/watch?v=i0iNu-1b6NI
+
 
 ### 2) Download and Open PhoenixSuit
 1) Download [`PhoenixSuit_Windows_V1.10.zip`](tools/PhoenixSuit_Windows_V1.10.zip) from the [tools/](tools/) directory.
@@ -118,11 +120,18 @@ If all went well, you should see the Debian logo (a red swirl) while the SonicPa
 
 ## MacOS
 
+Official Creality Video Tutorial: https://www.youtube.com/watch?v=dSs-mQ4ZltE
+
 1) Download [`PhoenixSuit_MacOS_T800.zip`](tools/PhoenixSuit_MacOS_T800.zip)
 
 2) See the official instructions located at [officialInstructions/Sonic Pad Firmware Burning Tutorial_MacOS_V1.3.pdf](officialInstructions/Sonic%20Pad%20Firmware%20Burning%20Tutorial_MacOS_V1.3.pdf).
 
 > Note that this is a command-line utility, without a GUI.
+
+>⚠️ It should be noted that the SonicPad-Debian firmware, unlike the stock firmware, uses a read/write filesystem. This means that, just like your computer at home, removing the power unexpectedly can damage your files. Do not use the button on the side of the SonicPad to turn it off. You must gracefully shutdown using a GUI or by issuing the `shutdown` or `restart` commands ⚠️
+
+If all went well, you should see the Debian logo (a red swirl) while the SonicPad reboots. You are done flashing and can now begin configuring. See [the main README for steps on connecting to Wi-Fi and using SSH](/README.md#️-installation-steps). See the [`docs/` directory](/docs/) for more information on configuring SonicPad-Debian, including setting a timezone, installing the accelerometer for resonance testing, and setting up USB automounting.
+
 
 -----
 
@@ -144,4 +153,9 @@ If all went well, you should see the Debian logo (a red swirl) while the SonicPa
 
 
 2) See the official instructions located at [officialInstructions/Sonic Pad Firmware Burning Tutorial_Ubuntu_V1.1.pdf](officialInstructions/Sonic%20Pad%20Firmware%20Burning%20Tutorial_Ubuntu_V1.1.pdf).
+
+
+>⚠️ It should be noted that the SonicPad-Debian firmware, unlike the stock firmware, uses a read/write filesystem. This means that, just like your computer at home, removing the power unexpectedly can damage your files. Do not use the button on the side of the SonicPad to turn it off. You must gracefully shutdown using a GUI or by issuing the `shutdown` or `restart` commands ⚠️
+
+If all went well, you should see the Debian logo (a red swirl) while the SonicPad reboots. You are done flashing and can now begin configuring. See [the main README for steps on connecting to Wi-Fi and using SSH](/README.md#️-installation-steps). See the [`docs/` directory](/docs/) for more information on configuring SonicPad-Debian, including setting a timezone, installing the accelerometer for resonance testing, and setting up USB automounting.
 
