@@ -6,6 +6,7 @@ SHELLTRAP=
 source spinner.sh
 
 # ---------------------------------------
+KERNEL_ARCHIIVE=./archives/kernel_tools.tar.gz
 PREBUILT_KERNEL=./prebuilt_kernel
 TEMP_DIR=./temp
 TOOLS_DIR=$PREBUILT_KERNEL/tools
@@ -20,12 +21,19 @@ OG_USER=${SUDO_USER:-$(whoami)}
 # ---------------------------------------
 
 # ---------------- IMG config------------
-IMG_SIZE=3000000000
+IMG_SIZE=4000000000
 #IMG_SIZE=2684354560
 BLOCKS=4096
 INODES_RATIO=16384
 INODES=$(($IMG_SIZE / $INODES_RATIO))
 #----------------------------------------
+
+start_spinner "Extracting kernel tools"
+{
+    rm -rf $PREBUILT_KERNEL
+    mkdir -p $PREBUILT_KERNEL
+    tar -xzf $KERNEL_ARCHIIVE -C $PREBUILT_KERNEL
+} &> $SHELLTRAP
 
 start_spinner "Creating ext4 partition"
 {
